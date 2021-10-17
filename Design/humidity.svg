@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   width="65mm"
+   height="90.728996mm"
+   viewBox="0 0 5.8492689 8.1645887"
+   fit=""
+   preserveAspectRatio="xMidYMid meet"
+   focusable="false"
+   id="svg11"
+   sodipodi:docname="humidity.svg"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs15" />
+  <sodipodi:namedview
+     id="namedview13"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     showgrid="false"
+     units="mm"
+     width="64.478mm"
+     height="90.729mm"
+     inkscape:zoom="0.5"
+     inkscape:cx="307"
+     inkscape:cy="504"
+     inkscape:window-width="1469"
+     inkscape:window-height="912"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg11"
+     inkscape:document-units="mm" />
+  <path
+     d="M 2.9246342,0 C 2.9246342,0 0,3.2902072 0,5.2399599 0,6.8582549 1.311211,8.1645891 2.9246342,8.1645891 A 2.9246342,2.9246288 0 0 0 5.8492686,5.2399599 C 5.8492686,3.2902072 2.9246342,0 2.9246342,0 M 4.1286082,3.2755843 4.6452936,3.7922687 1.7206598,6.7168974 1.2039744,6.200213 M 1.8278963,3.2902072 A 0.60929879,0.60929767 0 0 1 2.4371952,3.899505 0.60929879,0.60929767 0 0 1 1.8278963,4.5088028 0.60929879,0.60929767 0 0 1 1.2185976,3.899505 0.60929879,0.60929767 0 0 1 1.8278963,3.2902072 m 2.1934758,2.1934717 a 0.60929879,0.60929767 0 0 1 0.609299,0.6092978 0.60929879,0.60929767 0 0 1 -0.609299,0.6092977 0.60929879,0.60929767 0 0 1 -0.609299,-0.6092977 0.60929879,0.60929767 0 0 1 0.609299,-0.6092978 z"
+     fill="#ffffff"
+     id="path9"
+     style="stroke-width:0.48744" />
+</svg>
