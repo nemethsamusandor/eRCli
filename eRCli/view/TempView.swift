@@ -57,7 +57,12 @@ struct TempView: View {
                             .padding(20)
                         
                     }
-                }
+                }.gesture(DragGesture()
+                            .onChanged{
+                                if $0.startLocation.x > $0.location.x {
+                                    viewModel.settings()
+                                }
+                            })
             }
         }
     }
