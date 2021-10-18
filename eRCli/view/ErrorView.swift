@@ -26,13 +26,18 @@ struct ErrorView: View {
                     .padding(.bottom, 40).padding()
                     .foregroundColor(.white)
                 HStack {
-                    Button(action: retryHandler,
-                           label: { Text("Retry").bold() })
+                    Button(action: retryHandler, label: {
+                        Text("Retry")
+                            .bold()
+                            .foregroundColor(.white)
+                        })
                         .padding(.trailing,50)
                         .font(.title2)
-                    Button(action: settingsHandler,
-                           label: { Text("Settings").bold() })
-                        .font(.title2)
+                    Button(action: settingsHandler, label: {
+                            Text("Settings")
+                                .bold()
+                                .foregroundColor(.white)
+                    }).font(.title2)
                 }
             }
             

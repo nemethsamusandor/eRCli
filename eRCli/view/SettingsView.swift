@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject private var session = Session()
-    @ObservedObject var viewModel: ContentViewModel
+    @ObservedObject private(set) var viewModel: ContentViewModel
     @ObservedObject var deviceCode = NumbersOnly()
     @ObservedObject var unitNumber = NumbersOnly()
     @ObservedObject var timeSeparator = TextLimiter()
@@ -18,15 +18,22 @@ struct SettingsView: View {
     
     @State var temperatureUnitIndex = (Session().deviceSettings.isFahrenheit) ? 1 : 0
     @State var is24 = Session().deviceSettings.timeFormat
+    @State var dateFormat = Session().deviceSettings.dateFormat
     @State var isShowingScanner = false
+    @State var isChanged = false
 
     init(viewModel: ContentViewModel) {
+        self.init(viewModel: viewModel, code: nil)
+    }
+    
+    init(viewModel: ContentViewModel, code: Int64?) {
         self.viewModel = viewModel
         
-        deviceCode.value = "\(session.deviceSettings.deviceCode)"
-        unitNumber.value = "\(session.deviceSettings.unitNumber)"
-        timeSeparator.value = session.deviceSettings.timeSeparator
-        dateSeparator.value = session.deviceSettings.dateSeparator
+        self.deviceCode.value = "\(code ?? session.deviceSettings.deviceCode)"
+        
+        self.unitNumber.value = "\(session.deviceSettings.unitNumber)"
+        self.timeSeparator.value = session.deviceSettings.timeSeparator
+        self.dateSeparator.value = session.deviceSettings.dateSeparator
     }
     
     var body: some View {
@@ -36,12 +43,21 @@ struct SettingsView: View {
                 HeaderView(title: "SETTINGS")
 
                 HStack {
+                    Button(action: checkChanges,
+                        label: { Text("Cancel").bold() })
+                        .font(.title2)
+                        .foregroundColor(.white)
+                        .alert(isPresented: $isChanged) {
+                            SettingsAlert(leaveAction: viewModel.check, saveAction: updateSettings).showAlert()
+                        }
+
                     Spacer()
+
                     Button(action: updateSettings,
                         label: { Text("Save").bold() })
                         .font(.title2)
                         .foregroundColor(.white)
-                }.padding(.trailing, 15)
+                }.padding([.trailing, .leading], 15)
                 
                 VStack {
                     SettingsDevider()
@@ -113,7 +129,7 @@ struct SettingsView: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                                 .frame(width: 130, alignment: .leading)
-                            Picker("Date format", selection: $session.deviceSettings.dateFormat) {
+                            Picker("Date format", selection: $dateFormat) {
                                 ForEach (DateFormat.allCases, id: \.self) {
                                     Text($0.rawValue)
                                 }
@@ -169,19 +185,34 @@ struct SettingsView: View {
                     }
                 }.background(Color.blue.opacity(0.2))
                                 
-//                Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fit)
-//                    .frame(width:60, height: 60)
-//                    .foregroundColor(.white)
-//                    .onTapGesture {
-//                        updateSettings()
-//                    }
                 Spacer()
             }
+        }.gesture(getDragGesture(dragDirection: DragDirection.RIGHT, action: checkChanges)).alert(isPresented: $isChanged) {
+            SettingsAlert(leaveAction: viewModel.check, saveAction: updateSettings).showAlert()
         }
     }
 
+    // We should set the device code from QR-code scan
+    func setDeviceCode(deviceCode: String) {
+        self.deviceCode.value = deviceCode
+    }
+    
+    func checkChanges() {
+        if (session.deviceSettings.deviceCode != (Int64(deviceCode.value) ?? -1)
+            || session.deviceSettings.unitNumber != (Int64(unitNumber.value) ?? 5)
+            || session.deviceSettings.isFahrenheit != (temperatureUnitIndex == 1)
+            || session.deviceSettings.dateSeparator != dateSeparator.value
+            || session.deviceSettings.timeSeparator != timeSeparator.value
+            || session.deviceSettings.timeFormat != is24
+            || session.deviceSettings.dateFormat != dateFormat) {
+            isChanged = true
+        }
+        if (!isChanged) {
+            viewModel.check()
+        }
+        
+    }
+    
     func updateSettings() {
         session.deviceSettings.deviceCode = Int64(deviceCode.value) ?? -1
         session.deviceSettings.unitNumber = Int64(unitNumber.value) ?? 5
@@ -189,10 +220,35 @@ struct SettingsView: View {
         session.deviceSettings.dateSeparator = dateSeparator.value
         session.deviceSettings.timeSeparator = timeSeparator.value
         session.deviceSettings.timeFormat = is24
+        session.deviceSettings.dateFormat = dateFormat
         
         viewModel.check()
     }
 
+}
+
+struct SettingsAlert {
+    private var leaveAction: () -> Void
+    private var saveAction: () -> Void
+    
+    init(leaveAction: @escaping () -> Void, saveAction: @escaping() -> Void) {
+        self.leaveAction = leaveAction
+        self.saveAction = saveAction
+    }
+    
+    public func showAlert() -> Alert {
+        return Alert(
+            title: Text("Are you sure you want to leave the page?"),
+            message: Text("There are changes in settings"),
+            primaryButton: .destructive(Text("Leave")) {
+                leaveAction()
+            },
+            secondaryButton: .destructive(Text("Save")) {
+                saveAction()
+            }
+        )
+    }
+    
 }
 
 struct SettingsDevider : View {

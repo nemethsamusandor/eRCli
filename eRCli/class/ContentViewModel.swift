@@ -15,6 +15,7 @@ class ContentViewModel: ObservableObject {
         case loaded(Indoor)
         case failed(RoomTempError)
         case scanQR
+        case setCode(Int64?)
     }
     
     @Published private(set) var state = State.idle
@@ -41,13 +42,17 @@ class ContentViewModel: ObservableObject {
     func error(error: RoomTempError) {
         self.state = .failed(error)
     }
+        
+    func settings() {
+        self.state = .settings
+    }
     
     func scanQR() {
         self.state = .scanQR
     }
-    
-    func settings() {
-        self.state = .settings
+
+    func setCode(code: Int64?) {
+        self.state = .setCode(code)
     }
     
     private func initialize() {

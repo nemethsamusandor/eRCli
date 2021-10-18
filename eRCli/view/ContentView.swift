@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel = ContentViewModel()
-
+    
     var body: some View {
         switch viewModel.state {
             case .idle:
@@ -27,9 +27,11 @@ struct ContentView: View {
                 CodeScannerView(codeTypes: [.qr],
                                 simulatedData: "http://install.egain.se?id=94001404",
                                 completion: self.handleScan)
+            case .setCode(let code):
+                SettingsView(viewModel: self.viewModel, code: code)
         }
     }
-    
+        
     func handleScan(result: Result<String, CodeScannerView.ScanError>) {
         viewModel.settings()
 
@@ -50,7 +52,7 @@ struct ContentView: View {
                     return
                 }
                 
-                Session().deviceSettings.deviceCode = Int64(id[1]) ?? -1
+                viewModel.setCode(code: Int64(id[1]) ?? -1)
             case .failure(let error):
                 viewModel.error(error: RoomTempError.scanError(error.localizedDescription))
         }
@@ -58,9 +60,30 @@ struct ContentView: View {
 
 }
 
+func getDragGesture(dragDirection: DragDirection, action: @escaping () -> Void) -> _EndedGesture<DragGesture> {
+    return DragGesture(coordinateSpace: .local)
+                .onEnded {value in
+                    withAnimation() {
+                        var actDragDirection: DragDirection
+                        
+                        if (abs(value.translation.width) > abs(value.translation.height)) {
+                            actDragDirection = value.translation.width > 0 ? DragDirection.RIGHT : DragDirection.LEFT
+                        }
+                        else {
+                            actDragDirection = value.translation.height > 0 ? DragDirection.UP : DragDirection.DOWN
+                        }
+                        
+                        if (actDragDirection == dragDirection) {
+                            action()
+                        }
+                    }
+                }
+}
+
 struct BackgroundView: View {
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [.blue, Color.init("TopColor"), Color.init("BottomColor")]),
+        Color.white.edgesIgnoringSafeArea(.all)
+        LinearGradient(gradient: Gradient(colors: [.blue, Color.init("TopColor"), Color.init("Background")]),
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
@@ -148,7 +171,14 @@ struct StatusComponentView: View {
 }
 
 enum ValueSign: String {
-    case percentage = " rH%"
+    case percentage = " %rH"
     case celsius = " C°"
     case fahrenheit = " F°"
+}
+
+enum DragDirection {
+    case LEFT
+    case RIGHT
+    case UP
+    case DOWN
 }

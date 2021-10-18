@@ -57,12 +57,7 @@ struct TempView: View {
                             .padding(20)
                         
                     }
-                }.gesture(DragGesture()
-                            .onChanged{
-                                if $0.startLocation.x > $0.location.x {
-                                    viewModel.settings()
-                                }
-                            })
+                }.gesture(getDragGesture(dragDirection: DragDirection.LEFT, action: viewModel.settings))
             }
         }
     }
@@ -105,6 +100,7 @@ struct TempView: View {
         pattern += " " + (deviceSettings.timeFormat ? "HH" : "hh") + timeSep + "mm\(timeSep)ss" + (deviceSettings.timeFormat ? "" : "a")
         
         dateFormatter.dateFormat = pattern
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+0:00") as TimeZone?
             
         let inDateFormatter = ISO8601DateFormatter()
         
