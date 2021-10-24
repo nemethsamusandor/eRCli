@@ -1,8 +1,8 @@
 //
 //  AppError.swift
-//  eRCli
 //
-//  Created by Németh Sándor on 2021. 10. 23..
+//  Created by Sándor Németh on 2021.10.23.
+//  Copyright © 2021 Sándor Németh. All rights reserved.
 //
 
 import UIKit

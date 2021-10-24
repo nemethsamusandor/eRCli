@@ -1,8 +1,8 @@
 //
 //  Session.swift
-//  rTemp
 //
-//  Created by Németh Sándor on 2021. 10. 14..
+//  Created by Sándor Németh on 2021.10.14.
+//  Copyright © 2021 Sándor Németh. All rights reserved.
 //
 
 import UIKit

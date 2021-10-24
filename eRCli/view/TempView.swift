@@ -1,8 +1,8 @@
 //
 //  TempView.swift
-//  rTemp
 //
-//  Created by Németh Sándor on 2021. 10. 12..
+//  Created by Sándor Németh on 2021.10.12.
+//  Copyright © 2021 Sándor Németh. All rights reserved.
 //
 
 import SwiftUI

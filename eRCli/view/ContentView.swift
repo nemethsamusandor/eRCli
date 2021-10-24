@@ -1,9 +1,10 @@
 //
 //  ContentView.swift
-//  rTemp
 //
-//  Created by Németh Sándor on 2021. 10. 11..
+//  Created by Sándor Németh on 2021.10.11.
+//  Copyright © 2021 Sándor Németh. All rights reserved.
 //
+
 import CodeScanner
 
 import SwiftUI
