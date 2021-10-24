@@ -64,144 +64,145 @@ struct SettingsView: View {
                         .foregroundColor(.white)
                 }.padding([.trailing, .leading], 15*ratio)
                 
-                VStack {
-                    SettingsDevider()
-                    /**
-                     Device code section
-                     */
+                ScrollView {
                     VStack {
-                        HStack {
-                            Text("Device code:")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 130, alignment: .leading)
-                            TextField("Device code",
-                                      text: $deviceCode.value)
+                        SettingsDevider()
+                        /**
+                         Device code section
+                         */
+                        VStack {
+                            HStack {
+                                Text("Device code:")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .frame(width: 130, alignment: .leading)
+                                TextField("Device code",
+                                          text: $deviceCode.value)
+                                    .keyboardType(.decimalPad)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                Image(systemName: "qrcode.viewfinder")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 40*ratio)
+                                    .foregroundColor(.white)
+                                    .onTapGesture {
+                                        viewModel.scanQR()
+                                    }
+                                }.padding([.leading, .trailing], 15*ratio)
+                            
+                            SettingsDevider()
+
+                            /**
+                             Unit number section
+                             */
+                            HStack {
+                                Text("Unit number:")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .frame(width: 130, alignment: .leading)
+                                TextField("Unit number",
+                                      text: $unitNumber.value)
                                 .keyboardType(.decimalPad)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                            Image(systemName: "qrcode.viewfinder")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 40*ratio)
-                                .foregroundColor(.white)
-                                .onTapGesture {
-                                    viewModel.scanQR()
-                                }
                             }.padding([.leading, .trailing], 15*ratio)
-                        
-                        SettingsDevider()
 
-                        /**
-                         Unit number section
-                         */
-                        HStack {
-                            Text("Unit number:")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 130, alignment: .leading)
-                            TextField("Unit number",
-                                  text: $unitNumber.value)
-                            .keyboardType(.decimalPad)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                        }.padding([.leading, .trailing], 15*ratio)
+                            SettingsDevider()
 
-                        SettingsDevider()
-
-                        /**
-                         Temperature unit selector section
-                         */
-                        HStack {
-                            Text("Temp unit:")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 130, alignment: .leading)
-                            Picker("Temperature unit", selection: $temperatureUnitIndex) {
-                                Text("Celsius").tag(0)
-                                Text("Fahrenheit").tag(1)
-                            }
-                            .pickerStyle(SegmentedPickerStyle())
-                            
-                            Spacer()
-                        }.padding([.leading, .trailing], 15*ratio)
-               
-                        SettingsDevider()
-                    
-                        /**
-                         Date format selector section
-                         */
-                        HStack {
-                            Text("Date format:")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 130, alignment: .leading)
-                            Picker("Date format", selection: $dateFormat) {
-                                ForEach (DateFormat.allCases, id: \.self) {
-                                    Text($0.rawValue)
+                            /**
+                             Temperature unit selector section
+                             */
+                            HStack {
+                                Text("Temp unit:")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .frame(width: 130, alignment: .leading)
+                                Picker("Temperature unit", selection: $temperatureUnitIndex) {
+                                    Text("Celsius").tag(0)
+                                    Text("Fahrenheit").tag(1)
                                 }
-                            }
-                            .pickerStyle(SegmentedPickerStyle())
-                            
-                            Spacer()
-                        }.padding([.leading, .trailing], 15*ratio)
-                     
-                        SettingsDevider()
-                    
-                        HStack {
-                            /**
-                             Date separator section
-                             */
-                            Text("Date separator:")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 130, alignment: .leading)
-                            TextField("",
-                                      text: $dateSeparator.value)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            
-                            /**
-                             Time separator
-                             */
-                            Text("Time separator:")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 130, alignment: .leading)
-                            TextField("",
-                                      text: $timeSeparator.value)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                        }.padding([.leading, .trailing], 15*ratio)
-                     
-                        SettingsDevider()
-                    }
-                    
-                    VStack {
-                        /**
-                         Time format selector section
-                         */
-                        Toggle(isOn: $is24, label: {
-                            Text("24-hour time:")
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .foregroundColor(.white)
-                                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/, 0)
-                                .frame(alignment: .leading)
-                        }).padding([.leading, .trailing], 15*ratio)
-                        .toggleStyle(SwitchToggleStyle(tint: .blue))
-                        
-                        SettingsDevider()
-
-                        VStack {
-                            Text("•eRCli•© v" + appVersion!)
-                                .font(.title3)
-                                .foregroundColor(.white)
-                            Spacer()
-                            Text("All rights reserved")
-                                .font(.footnote)
-                                .foregroundColor(.white)
-                        }.frame(height: 80*ratio).padding([.leading, .trailing], 15*ratio)
-                        
-                        SettingsDevider()
-                    }
-                }.background(Color.blue.opacity(0.2))
+                                .pickerStyle(SegmentedPickerStyle())
                                 
+                                Spacer()
+                            }.padding([.leading, .trailing], 15*ratio)
+                   
+                            SettingsDevider()
+                        
+                            /**
+                             Date format selector section
+                             */
+                            HStack {
+                                Text("Date format:")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .frame(width: 130, alignment: .leading)
+                                Picker("Date format", selection: $dateFormat) {
+                                    ForEach (DateFormat.allCases, id: \.self) {
+                                        Text($0.rawValue)
+                                    }
+                                }
+                                .pickerStyle(SegmentedPickerStyle())
+                                
+                                Spacer()
+                            }.padding([.leading, .trailing], 15*ratio)
+                         
+                            SettingsDevider()
+                        
+                            HStack {
+                                /**
+                                 Date separator section
+                                 */
+                                Text("Date separator:")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .frame(width: 130, alignment: .leading)
+                                TextField("",
+                                          text: $dateSeparator.value)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                
+                                /**
+                                 Time separator
+                                 */
+                                Text("Time separator:")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .frame(width: 130, alignment: .leading)
+                                TextField("",
+                                          text: $timeSeparator.value)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            }.padding([.leading, .trailing], 15*ratio)
+                         
+                            SettingsDevider()
+                        }
+                        
+                        VStack {
+                            /**
+                             Time format selector section
+                             */
+                            Toggle(isOn: $is24, label: {
+                                Text("24-hour time:")
+                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                    .foregroundColor(.white)
+                                    .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/, 0)
+                                    .frame(alignment: .leading)
+                            }).padding([.leading, .trailing], 15*ratio)
+                            .toggleStyle(SwitchToggleStyle(tint: .blue))
+                            
+                            SettingsDevider()
+
+                            VStack {
+                                Text("•eRCli•© v" + appVersion!)
+                                    .font(.title3)
+                                    .foregroundColor(.white)
+                                Spacer()
+                                Text("All rights reserved")
+                                    .font(.footnote)
+                                    .foregroundColor(.white)
+                            }.frame(height: 80*ratio).padding([.leading, .trailing], 15*ratio)
+                            
+                            SettingsDevider()
+                        }
+                    }.background(Color.blue.opacity(0.2))
+                }
                 Spacer()
             }
         }.gesture(getDragGesture(gestures: [DragDirection.RIGHT: checkChanges]))
