@@ -22,6 +22,8 @@ struct SettingsView: View {
     @State var isShowingScanner = false
     @State var isChanged = false
 
+    let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    
     init(viewModel: ContentViewModel) {
         self.init(viewModel: viewModel, code: nil)
     }
@@ -182,14 +184,27 @@ struct SettingsView: View {
                         .toggleStyle(SwitchToggleStyle(tint: .blue))
                         
                         SettingsDevider()
+
+                        VStack {
+                            Text("•eRCli•© v" + appVersion!)
+                                .font(.title3)
+                                .foregroundColor(.white)
+                            Spacer()
+                            Text("All rights reserved")
+                                .font(.footnote)
+                                .foregroundColor(.white)
+                        }.frame(height: 80).padding([.leading, .trailing], 15)
+                        
+                        SettingsDevider()
                     }
                 }.background(Color.blue.opacity(0.2))
                                 
                 Spacer()
             }
-        }.gesture(getDragGesture(dragDirection: DragDirection.RIGHT, action: checkChanges)).alert(isPresented: $isChanged) {
-            SettingsAlert(leaveAction: viewModel.check, saveAction: updateSettings).showAlert()
-        }
+        }.gesture(getDragGesture(gestures: [DragDirection.RIGHT: checkChanges]))
+            .alert(isPresented: $isChanged) {
+                SettingsAlert(leaveAction: viewModel.check, saveAction: updateSettings).showAlert()
+            }
     }
 
     // We should set the device code from QR-code scan
@@ -210,7 +225,6 @@ struct SettingsView: View {
         if (!isChanged) {
             viewModel.check()
         }
-        
     }
     
     func updateSettings() {

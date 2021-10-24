@@ -27,10 +27,10 @@ struct RoomTempRequest {
         self.installResourceURL = installResourceURL
     }
     
-    func installDevice (completion: @escaping(Result<DeviceCodeResponse, RoomTempError>) -> Void) {
+    func installDevice (completion: @escaping(Result<DeviceCodeResponse, AppError>) -> Void) {
         let dataTask = URLSession.shared.dataTask(with: installResourceURL) { data, _, _ in
             guard let jsonData = data else {
-                completion(.failure(.noDataAvailable("No data received from the interface: " + installResourceURL.absoluteString)))
+                completion(.failure(AppError(code: .noDataAvailable, message: "No data received from the interface: " + installResourceURL.absoluteString)))
                 return
             }
             
@@ -45,23 +45,23 @@ struct RoomTempRequest {
                     completion(.success(deviceCodeResponse))
                 }
                 else {
-                    completion(.failure(.wrongSettings("Device code: \(deviceCode) or unit number: \(unitNumber) is misconfigured!")))
+                    completion(.failure(AppError(code: .wrongSettings, message: "Device code: \(deviceCode) or unit number: \(unitNumber) is misconfigured!")))
                 }
             } catch {
-                completion(.failure(.canNotProcessData("Data cannot be processed")))
+                completion(.failure(AppError(code: .canNotProcessData, message: "Data cannot be processed")))
             }
         }
         dataTask.resume()
     }
     
-    func getTemperature (deviceId: String, completion: @escaping(Result<Indoor, RoomTempError>) -> Void) {
+    func getTemperature (deviceId: String, completion: @escaping(Result<Indoor, AppError>) -> Void) {
         let indoorResourceString = SERVER + API_PATH + INDOOR_PATH + deviceId
         
         guard let indoorResourceURL = URL(string: indoorResourceString) else {fatalError()}
         
         let dataTask = URLSession.shared.dataTask(with: indoorResourceURL) { data, _, _ in
             guard let jsonData = data else {
-                completion(.failure(.noDataAvailable("No data received from the interface: " + indoorResourceURL.absoluteString)))
+                completion(.failure(AppError(code: .noDataAvailable, message: "No data received from the interface: " + indoorResourceURL.absoluteString)))
                 return
             }
             
@@ -70,7 +70,7 @@ struct RoomTempRequest {
                 let indoor = try decoder.decode(Indoor.self, from: jsonData)
                 completion(.success(indoor))
             } catch {
-                completion(.failure(.canNotProcessData("Data cannot be processed")))
+                completion(.failure(AppError(code: .canNotProcessData, message: "Data cannot be processed")))
             }
         }
         dataTask.resume()

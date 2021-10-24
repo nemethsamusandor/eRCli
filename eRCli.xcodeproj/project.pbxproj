@@ -12,7 +12,6 @@
 		280ABC7F271C51D90084A9EC /* DeviceCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280ABC7E271C51D90084A9EC /* DeviceCodeResponse.swift */; };
 		280ABC81271C51F60084A9EC /* DeviceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280ABC80271C51F60084A9EC /* DeviceSettings.swift */; };
 		280ABC83271C52090084A9EC /* Indoor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280ABC82271C52090084A9EC /* Indoor.swift */; };
-		280ABC85271C521D0084A9EC /* TempError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280ABC84271C521D0084A9EC /* TempError.swift */; };
 		280ABC87271C52480084A9EC /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280ABC86271C52480084A9EC /* Session.swift */; };
 		280ABC89271C525E0084A9EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280ABC88271C525E0084A9EC /* ContentView.swift */; };
 		280ABC8B271C526E0084A9EC /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280ABC8A271C526E0084A9EC /* ErrorView.swift */; };
@@ -21,8 +20,10 @@
 		28916ADE271BF947008E9692 /* eRCliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28916ADD271BF947008E9692 /* eRCliApp.swift */; };
 		28916AE2271BF947008E9692 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28916AE1271BF947008E9692 /* Assets.xcassets */; };
 		28916AE5271BF947008E9692 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28916AE4271BF947008E9692 /* Preview Assets.xcassets */; };
-		28A06F6B271C561B00641250 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 28A06F6A271C561B00641250 /* CodeScanner */; };
 		28A06F6D271CA29F00641250 /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A06F6C271CA29F00641250 /* RefreshableScrollView.swift */; };
+		28A06F70272013F500641250 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 28A06F6F272013F500641250 /* CodeScanner */; };
+		28E7C0EA2724118D005DB726 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28E7C0E92724118D005DB726 /* LICENSE.txt */; };
+		28E7C0EC2724751B005DB726 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E7C0EB2724751B005DB726 /* AppError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +32,6 @@
 		280ABC7E271C51D90084A9EC /* DeviceCodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCodeResponse.swift; sourceTree = "<group>"; };
 		280ABC80271C51F60084A9EC /* DeviceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSettings.swift; sourceTree = "<group>"; };
 		280ABC82271C52090084A9EC /* Indoor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indoor.swift; sourceTree = "<group>"; };
-		280ABC84271C521D0084A9EC /* TempError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempError.swift; sourceTree = "<group>"; };
 		280ABC86271C52480084A9EC /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		280ABC88271C525E0084A9EC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		280ABC8A271C526E0084A9EC /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -43,6 +43,9 @@
 		28916AE4271BF947008E9692 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		28916AE6271BF947008E9692 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28A06F6C271CA29F00641250 /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
+		28E7C0E92724118D005DB726 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		28E7C0EB2724751B005DB726 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		28E7C0ED2725B38D005DB726 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28A06F6B271C561B00641250 /* CodeScanner in Frameworks */,
+				28A06F70272013F500641250 /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				280ABC7C271C51B80084A9EC /* ContentViewModel.swift */,
+				28E7C0EB2724751B005DB726 /* AppError.swift */,
 			);
 			path = class;
 			sourceTree = "<group>";
@@ -79,7 +83,6 @@
 				280ABC7E271C51D90084A9EC /* DeviceCodeResponse.swift */,
 				280ABC80271C51F60084A9EC /* DeviceSettings.swift */,
 				280ABC82271C52090084A9EC /* Indoor.swift */,
-				280ABC84271C521D0084A9EC /* TempError.swift */,
 			);
 			path = dto;
 			sourceTree = "<group>";
@@ -132,6 +135,8 @@
 				28916AE1271BF947008E9692 /* Assets.xcassets */,
 				28916AE6271BF947008E9692 /* Info.plist */,
 				28916AE3271BF947008E9692 /* Preview Content */,
+				28E7C0E92724118D005DB726 /* LICENSE.txt */,
+				28E7C0ED2725B38D005DB726 /* README.md */,
 			);
 			path = eRCli;
 			sourceTree = "<group>";
@@ -161,7 +166,7 @@
 			);
 			name = eRCli;
 			packageProductDependencies = (
-				28A06F6A271C561B00641250 /* CodeScanner */,
+				28A06F6F272013F500641250 /* CodeScanner */,
 			);
 			productName = eRCli;
 			productReference = 28916ADA271BF947008E9692 /* eRCli.app */;
@@ -191,7 +196,7 @@
 			);
 			mainGroup = 28916AD1271BF947008E9692;
 			packageReferences = (
-				28A06F69271C561B00641250 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				28A06F6E272013F500641250 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 28916ADB271BF947008E9692 /* Products */;
 			projectDirPath = "";
@@ -207,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E7C0EA2724118D005DB726 /* LICENSE.txt in Resources */,
 				28916AE5271BF947008E9692 /* Preview Assets.xcassets in Resources */,
 				28916AE2271BF947008E9692 /* Assets.xcassets in Resources */,
 			);
@@ -220,11 +226,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				280ABC7D271C51B80084A9EC /* ContentViewModel.swift in Sources */,
-				280ABC85271C521D0084A9EC /* TempError.swift in Sources */,
 				280ABC7F271C51D90084A9EC /* DeviceCodeResponse.swift in Sources */,
 				28916ADE271BF947008E9692 /* eRCliApp.swift in Sources */,
 				280ABC83271C52090084A9EC /* Indoor.swift in Sources */,
 				28A06F6D271CA29F00641250 /* RefreshableScrollView.swift in Sources */,
+				28E7C0EC2724751B005DB726 /* AppError.swift in Sources */,
 				280ABC8F271C52960084A9EC /* TempView.swift in Sources */,
 				280ABC89271C525E0084A9EC /* ContentView.swift in Sources */,
 				280ABC81271C51F60084A9EC /* DeviceSettings.swift in Sources */,
@@ -289,7 +295,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -344,7 +350,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -422,20 +428,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		28A06F69271C561B00641250 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+		28A06F6E272013F500641250 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			repositoryURL = "https://github.com/twostraws/CodeScanner.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.7;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		28A06F6A271C561B00641250 /* CodeScanner */ = {
+		28A06F6F272013F500641250 /* CodeScanner */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 28A06F69271C561B00641250 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			package = 28A06F6E272013F500641250 /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -13,7 +13,7 @@ class ContentViewModel: ObservableObject {
         case loading
         case settings
         case loaded(Indoor)
-        case failed(RoomTempError)
+        case failed(AppError)
         case scanQR
         case setCode(Int64?)
     }
@@ -39,7 +39,7 @@ class ContentViewModel: ObservableObject {
         }
     }
     
-    func error(error: RoomTempError) {
+    func error(error: AppError) {
         self.state = .failed(error)
     }
         
@@ -50,7 +50,7 @@ class ContentViewModel: ObservableObject {
     func scanQR() {
         self.state = .scanQR
     }
-
+    
     func setCode(code: Int64?) {
         self.state = .setCode(code)
     }

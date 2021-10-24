@@ -25,6 +25,7 @@ struct ContentView: View {
                 TempView(temperature: indoor.temperature, humidity: indoor.humidity, date: indoor.timestamp, viewModel: self.viewModel)
             case .scanQR:
                 CodeScannerView(codeTypes: [.qr],
+                                showViewfinder: true,
                                 simulatedData: "http://install.egain.se?id=94001404",
                                 completion: self.handleScan)
             case .setCode(let code):
@@ -42,25 +43,24 @@ struct ContentView: View {
             case .success(let code):
                 let details = code.components(separatedBy: "?")
                 guard details.count == 2 else {
-                    viewModel.error(error: RoomTempError.qrCodeNotValid("Scanned QR code cannot be processed"))
+                    viewModel.error(error: AppError(code: .qrCodeNotValid, message: "Scanned QR code cannot be processed"))
                     return
                 }
                 
                 let id = details[1].components(separatedBy: "=")
                 guard id.count == 2 else {
-                    viewModel.error(error: RoomTempError.qrCodeNotValid("Scanned QR code cannot be processed"))
+                    viewModel.error(error: AppError(code: .qrCodeNotValid, message: "Scanned QR code cannot be processed"))
                     return
                 }
                 
                 viewModel.setCode(code: Int64(id[1]) ?? -1)
             case .failure(let error):
-                viewModel.error(error: RoomTempError.scanError(error.localizedDescription))
+                viewModel.error(error: AppError(code: .scanError, message: error.localizedDescription))
         }
     }
-
 }
 
-func getDragGesture(dragDirection: DragDirection, action: @escaping () -> Void) -> _EndedGesture<DragGesture> {
+func getDragGesture(gestures: [DragDirection : () -> Void]) -> _EndedGesture<DragGesture> {
     return DragGesture(coordinateSpace: .local)
                 .onEnded {value in
                     withAnimation() {
@@ -73,9 +73,10 @@ func getDragGesture(dragDirection: DragDirection, action: @escaping () -> Void) 
                             actDragDirection = value.translation.height > 0 ? DragDirection.UP : DragDirection.DOWN
                         }
                         
-                        if (actDragDirection == dragDirection) {
-                            action()
+                        if (gestures.keys.contains(actDragDirection)) {
+                            gestures[actDragDirection]!()
                         }
+                        
                     }
                 }
 }

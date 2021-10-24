@@ -57,7 +57,7 @@ struct TempView: View {
                             .padding(20)
                         
                     }
-                }.gesture(getDragGesture(dragDirection: DragDirection.LEFT, action: viewModel.settings))
+                }.gesture(getDragGesture(gestures: [DragDirection.LEFT: viewModel.settings]))
             }
         }
     }
