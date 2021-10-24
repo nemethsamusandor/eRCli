@@ -1,19 +1,19 @@
 # •eRCli• for egain
 
-eRCli application is a simple application for egain temperature and humidity sensor replacing the web user interface
+eRCli application is a simple application for egain temperature and humidity sensor by replacing the web user interface
 
 ## Usage
 
-Set up the sensor code on the settings page, which will appear on the first start up of the application.
-Usually there is a sticker on the sensor what contains the QR code and the code of the sensor.
-Either scan the QS code tap on the QR code image or type it manually in the Device code field.
+Set up the sensor code on the settings page, which will appear on the first start up of the application. 
+Usually there is a sticker on the sensor what contains the QR code and the code of the sensor. 
+Either scan the QS code tap on the QR code image or type it manually in the Device code field. 
 Unit number is set automatically after the Device code is set, but it can be changed, if needed.
 
 There are possibility to set Temperature unit (Celsius and Fahrenheit) as well as date and time formats.
 
 When all desired setting are set tap on Save or swipe to right and tap on the confirmation dialog Save.
 
-It is easy to navigate between the Room temperature and Settings pages using swioe gestures.
+It is easy to navigate between the Room temperature and Settings pages using swipe gestures.
 
 Pull down to refresh the Room temperate on the main page
 
