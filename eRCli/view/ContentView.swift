@@ -93,6 +93,8 @@ struct BackgroundView: View {
 }
 
 struct HeaderView: View {
+    let ratio = getRatio()
+    
     var title: String
     
     var body: some View {
@@ -100,20 +102,20 @@ struct HeaderView: View {
             HStack (alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/) {
                 Text("•eRCli• for")
                     .lineSpacing(0)
-                    .font(.system(size: 10, weight: .bold))
+                    .font(.system(size: 10*ratio, weight: .bold))
                     .foregroundColor(.white)
-                    .padding(.leading, 15)
+                    .padding(.leading, 15*ratio)
             }
             Image("logo")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 40, alignment: .leading)
+                .frame(height: 40*ratio, alignment: .leading)
                 .foregroundColor(.white)
             Spacer()
             Text(title)
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 .foregroundColor(.white)
-                .padding(.trailing, 15)
+                .padding(.trailing, 15*ratio)
         }
         Divider()
             .frame(height: 2)
@@ -151,25 +153,34 @@ struct StartView: View {
 }
 
 struct StatusComponentView: View {
+    let ratio = getRatio()
     
     var imageName: String
     var value: String
     var valueSign: ValueSign
     
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 10*ratio) {
             Image(imageName)
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width:180, height: 180)
+                .frame(width:180*ratio, height: 180*ratio)
             
             Text(value + valueSign.rawValue)
-                .font(.system(size: 60, weight: .medium))
+                .font(.system(size: 60*ratio, weight: .medium))
                 .foregroundColor(.white)
         }
-        .padding(.bottom, 40)
+        .padding(.bottom, 40*ratio)
     }
+}
+
+func getRatio() -> CGFloat {
+    let refHeight: CGFloat = 926 // iPhone 12 Pro max height
+    let screenSize: CGRect = UIScreen.main.bounds
+
+    let maxSize: CGFloat = screenSize.height > screenSize.width ? screenSize.height : screenSize.width
+    return maxSize/refHeight
 }
 
 enum ValueSign: String {

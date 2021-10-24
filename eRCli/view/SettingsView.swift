@@ -10,6 +10,8 @@ import CodeScanner
 import SwiftUI
 
 struct SettingsView: View {
+    let ratio = getRatio()
+    
     @ObservedObject private var session = Session()
     @ObservedObject private(set) var viewModel: ContentViewModel
     @ObservedObject var deviceCode = NumbersOnly()
@@ -42,7 +44,7 @@ struct SettingsView: View {
     var body: some View {
         ZStack(alignment: .top) {
             BackgroundView()
-            VStack(spacing: 10){
+            VStack(spacing: 10*ratio){
                 HeaderView(title: "SETTINGS")
 
                 HStack {
@@ -60,7 +62,7 @@ struct SettingsView: View {
                         label: { Text("Save").bold() })
                         .font(.title2)
                         .foregroundColor(.white)
-                }.padding([.trailing, .leading], 15)
+                }.padding([.trailing, .leading], 15*ratio)
                 
                 VStack {
                     SettingsDevider()
@@ -80,12 +82,12 @@ struct SettingsView: View {
                             Image(systemName: "qrcode.viewfinder")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(height: 40)
+                                .frame(height: 40*ratio)
                                 .foregroundColor(.white)
                                 .onTapGesture {
                                     viewModel.scanQR()
                                 }
-                            }.padding([.leading, .trailing], 15)
+                            }.padding([.leading, .trailing], 15*ratio)
                         
                         SettingsDevider()
 
@@ -101,7 +103,7 @@ struct SettingsView: View {
                                   text: $unitNumber.value)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                        }.padding([.leading, .trailing], 15)
+                        }.padding([.leading, .trailing], 15*ratio)
 
                         SettingsDevider()
 
@@ -120,7 +122,7 @@ struct SettingsView: View {
                             .pickerStyle(SegmentedPickerStyle())
                             
                             Spacer()
-                        }.padding([.leading, .trailing], 15)
+                        }.padding([.leading, .trailing], 15*ratio)
                
                         SettingsDevider()
                     
@@ -140,7 +142,7 @@ struct SettingsView: View {
                             .pickerStyle(SegmentedPickerStyle())
                             
                             Spacer()
-                        }.padding([.leading, .trailing], 15)
+                        }.padding([.leading, .trailing], 15*ratio)
                      
                         SettingsDevider()
                     
@@ -166,7 +168,7 @@ struct SettingsView: View {
                             TextField("",
                                       text: $timeSeparator.value)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                        }.padding([.leading, .trailing], 15)
+                        }.padding([.leading, .trailing], 15*ratio)
                      
                         SettingsDevider()
                     }
@@ -181,7 +183,7 @@ struct SettingsView: View {
                                 .foregroundColor(.white)
                                 .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/, 0)
                                 .frame(alignment: .leading)
-                        }).padding([.leading, .trailing], 15)
+                        }).padding([.leading, .trailing], 15*ratio)
                         .toggleStyle(SwitchToggleStyle(tint: .blue))
                         
                         SettingsDevider()
@@ -194,7 +196,7 @@ struct SettingsView: View {
                             Text("All rights reserved")
                                 .font(.footnote)
                                 .foregroundColor(.white)
-                        }.frame(height: 80).padding([.leading, .trailing], 15)
+                        }.frame(height: 80*ratio).padding([.leading, .trailing], 15*ratio)
                         
                         SettingsDevider()
                     }
