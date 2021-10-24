@@ -113,7 +113,7 @@ struct HeaderView: View {
                 .foregroundColor(.white)
             Spacer()
             Text(title)
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .font(.title2)
                 .foregroundColor(.white)
                 .padding(.trailing, 15*ratio)
         }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 @main
+@available(iOS 14, *)
 struct eRCliApp: App {
         
     var body: some Scene {        
